@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Карточка студента</title>
+    <link rel="icon" type="image/jpeg" href="../assets/img/favicon.jpg" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body>
+    <h1 id="formTitle">Новый студент</h1>
+    <p>
+      Заполните поля и сохраните запись. Черновик сохраняется автоматически.
+    </p>
+
+    <p><a href="../table/index.html"> К списку студентов</a></p>
+
+    <p class="status" id="status" role="status" hidden></p>
+
+    <form id="application-form">
+      <fieldset>
+        <legend>Студент</legend>
+
+        <div class="field">
+          <label for="fullName">ФИО</label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            autocomplete="name"
+            minlength="5"
+            maxlength="120"
+            pattern="[А-Яа-яЁёA-Za-z\- ]+"
+            title="Только буквы, пробелы и дефис"
+            required
+          />
+          <span class="error" data-error-for="fullName"></span>
+        </div>
+
+        <div class="field">
+          <label for="group">Группа</label>
+          <input
+            type="text"
+            id="group"
+            name="group"
+            maxlength="20"
+            pattern="[A-Za-zА-Яа-я0-9./\-]{2,20}"
+            title="буквы и цифры, 2-20 символов"
+            required
+          />
+          <span class="error" data-error-for="group"></span>
+        </div>
+
+        <div class="field">
+          <label for="isuId">ID (ИСУ)</label>
+          <input
+            type="text"
+            id="isuId"
+            name="isuId"
+            inputmode="numeric"
+            maxlength="10"
+            pattern="[0-9]{5,10}"
+            title="От 5 до 10 цифр"
+            required
+          />
+          <span class="hint">Только цифры 5-10 знаков</span>
+          <span class="error" data-error-for="isuId"></span>
+        </div>
+
+        <div class="field checkbox">
+          <input type="checkbox" id="isForeigner" name="isForeigner" />
+          <label for="isForeigner">Иностранный студент</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Размещение</legend>
+
+        <div class="field">
+          <label for="dormitory">Номер общежития</label>
+          <select id="dormitory" name="dormitory" required>
+            <option value="">-- выберите --</option>
+            <option value="1">№ 1</option>
+            <option value="2">№ 2</option>
+            <option value="3">№ 3</option>
+            <option value="4">№ 4</option>
+            <option value="5">№ 5</option>
+            <option value="6">№ 6</option>
+          </select>
+          <span class="error" data-error-for="dormitory"></span>
+        </div>
+
+        <div class="field">
+          <label for="room">Комната</label>
+          <input
+            type="text"
+            id="room"
+            name="room"
+            inputmode="numeric"
+            maxlength="5"
+            pattern="[0-9]{1,5}"
+            title="Номер комнаты - число"
+            required
+          />
+          <span class="error" data-error-for="room"></span>
+        </div>
+
+        <div class="field">
+          <label for="dateFrom">Срок заселения: с</label>
+          <input type="date" id="dateFrom" name="dateFrom" required />
+          <span class="error" data-error-for="dateFrom"></span>
+        </div>
+
+        <div class="field">
+          <label for="dateTo">Срок заселения: по</label>
+          <input type="date" id="dateTo" name="dateTo" required />
+          <span class="error" data-error-for="dateTo"></span>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Дополнительно</legend>
+
+        <div class="field">
+          <label for="notes">Заметки</label>
+          <textarea id="notes" name="notes" maxlength="300"></textarea>
+          <span class="hint"><span id="notesCount">0</span> / 300</span>
+        </div>
+      </fieldset>
+
+      <p>
+        <button type="submit" id="submitBtn">Добавить студента</button>
+        <button type="button" id="clearBtn">Очистить</button>
+      </p>
+
+      <p id="savedNote"></p>
+    </form>
+
+    <script src="../assets/js/cookies.js"></script>
+    <script src="../assets/js/storage.js"></script>
+    <script src="../assets/js/form.js"></script>
+  </body>
+</html>

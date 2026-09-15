@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Досье студента</title>
+    <link rel="icon" type="image/jpeg" href="../assets/img/favicon.jpg" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body>
+    <h1 id="title">Досье студента</h1>
+
+    <p><a href="../table/index.html">К списку студентов</a></p>
+
+    <p class="status" id="status" role="status" hidden></p>
+
+    <div id="card" hidden>
+      <h2>Студент</h2>
+      <dl>
+        <dt>ФИО</dt>
+        <dd id="fullName"></dd>
+
+        <dt>Группа</dt>
+        <dd id="group"></dd>
+
+        <dt>ИСУ id</dt>
+        <dd id="isuId"></dd>
+
+        <dt>Иностранный студент</dt>
+        <dd id="isForeigner"></dd>
+      </dl>
+
+      <h2>Размещение</h2>
+      <dl>
+        <dt>Общежитие</dt>
+        <dd id="dormitory"></dd>
+
+        <dt>Комната</dt>
+        <dd id="room"></dd>
+
+        <dt>Срок заселения</dt>
+        <dd id="term"></dd>
+
+        <dt>Продолжительность</dt>
+        <dd id="duration"></dd>
+
+        <dt>Состояние</dt>
+        <dd id="termState"></dd>
+      </dl>
+
+      <h2>Заметки</h2>
+      <p class="notes" id="notes"></p>
+
+      <h2>Служебная информация</h2>
+      <dl>
+        <dt>Идентификатор записи</dt>
+        <dd id="recordId"></dd>
+
+        <dt>Добавлена</dt>
+        <dd id="createdAt"></dd>
+
+        <dt>Изменена</dt>
+        <dd id="updatedAt"></dd>
+      </dl>
+
+      <p>
+        <a id="editLink" href="../form/index.html">Редактировать</a>
+        <button type="button" id="deleteBtn">Удалить</button>
+      </p>
+    </div>
+
+    <script src="../assets/js/cookies.js"></script>
+    <script src="../assets/js/storage.js"></script>
+    <script src="../assets/js/format.js"></script>
+    <script src="../assets/js/student.js"></script>
+  </body>
+</html>
