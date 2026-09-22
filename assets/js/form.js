@@ -4,7 +4,6 @@ const DRAFT_DAYS = 30;
 const form = document.getElementById("application-form");
 const formTitle = document.getElementById("formTitle");
 const statusBox = document.getElementById("status");
-const savedNote = document.getElementById("savedNote");
 const notesCount = document.getElementById("notesCount");
 const clearBtn = document.getElementById("clearBtn");
 const submitBtn = document.getElementById("submitBtn");
@@ -126,8 +125,7 @@ function saveDraft() {
   }
 
   setCookieJSON(DRAFT_COOKIE, collectData(), DRAFT_DAYS);
-  savedNote.textContent =
-    "Черновик сохранён в cookie: " + new Date().toLocaleTimeString("ru-RU");
+
 }
 
 function updateNotesCount() {
@@ -155,8 +153,7 @@ if (requestedId) {
 
   if (draft) {
     fillForm(draft);
-    savedNote.textContent = "Загружен cookie";
-  }
+    }
 }
 
 updateNotesCount();
