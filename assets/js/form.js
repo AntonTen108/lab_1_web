@@ -13,8 +13,8 @@ var editing = null;
 
 function collectData() {
   return {
-    fullName: form.fullName.value.trim(),
-    group: form.group.value.trim(),
+    fullName: form.fullName.value.trim().replace(/\s+/g, " "),
+    group: form.group.value.trim().toUpperCase(),
     isuId: form.isuId.value.trim(),
     dormitory: form.dormitory.value,
     room: form.room.value.trim(),
@@ -70,19 +70,32 @@ function clearErrors() {
   }
 }
 
+var NAME_RE = /^[А-Яа-яЁёA-Za-z]+(?:[- ][А-Яа-яЁёA-Za-z]+)+$/;
+var GROUP_RE = /^[А-ЯЁ][1-9]\d{3,4}$/;
+var ISU_RE = /^[1-9]\d{5}$/;
+var MIN_YEAR = 2000;
+var MAX_YEAR = 2099;
+
+function isDateInRange(value) {
+  var year = Number(value.slice(0, 4));
+  return year >= MIN_YEAR && year <= MAX_YEAR;
+}
+
 function validate(data) { // TODO !!!!!!!!!!!!!
   var errors = {};
 
   if (data.fullName.length < 5) {
     errors.fullName = "Укажите фамилию, имя и отчество";
-  } else if (data.fullName.split(" ").length < 2) {
-    errors.fullName = "Укажите хотя бы фамилию и имя";
+  } else if (!NAME_RE.test(data.fullName)) {
+    errors.fullName = "Только буквы: хотя бы фамилия и имя";
   }
   if (!data.group) {
     errors.group = "Укажите группу";
+  } else if (!GROUP_RE.test(data.group)) {
+    errors.group = "Русская буква и номер не с нуля, например Р3110";
   }
-  if (!/^\d{5,10}$/.test(data.isuId)) {
-    errors.isuId = "ID состоит из 5-10 цифр";
+  if (!ISU_RE.test(data.isuId)) {
+    errors.isuId = "ID состоит из 6 цифр и не начинается с нуля";
   }
   if (!data.dormitory) {
     errors.dormitory = "Выберите общежитие";
@@ -92,9 +105,13 @@ function validate(data) { // TODO !!!!!!!!!!!!!
   }
   if (!data.dateFrom) {
     errors.dateFrom = "Укажите дату заселения";
+  } else if (!isDateInRange(data.dateFrom)) {
+    errors.dateFrom = "Год должен быть от " + MIN_YEAR + " до " + MAX_YEAR;
   }
   if (!data.dateTo) {
     errors.dateTo = "Укажите дату выселения";
+  } else if (!isDateInRange(data.dateTo)) {
+    errors.dateTo = "Год должен быть от " + MIN_YEAR + " до " + MAX_YEAR;
   }
   if (data.dateFrom && data.dateTo && data.dateFrom > data.dateTo) {
     errors.dateTo = "Дата окончания раньше даты начала";
@@ -145,6 +162,10 @@ if (requestedId) {
 updateNotesCount();
 
 form.addEventListener("input", function (event) {
+  if (event.target === form.isuId || event.target === form.room) {
+    event.target.value = event.target.value.replace(/\D/g, "");
+  }
+
   saveDraft();
 
   if (event.target === form.notes) {
@@ -192,7 +213,7 @@ clearBtn.addEventListener("click", function () {
     form.reset();
     deleteCookie(DRAFT_COOKIE);
     savedNote.textContent = "";
-    showStatus("Форма очищена, чернвик удалён");
+    showStatus("Форма очищена, черновик удалён");
   }
 
   clearErrors();
