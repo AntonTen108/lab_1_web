@@ -1,8 +1,8 @@
-var card = document.getElementById("card");
-var statusBox = document.getElementById("status");
-var title = document.getElementById("title");
-var editLink = document.getElementById("editLink");
-var deleteBtn = document.getElementById("deleteBtn");
+const card = document.getElementById("card");
+const statusBox = document.getElementById("status");
+const title = document.getElementById("title");
+const editLink = document.getElementById("editLink");
+const deleteBtn = document.getElementById("deleteBtn");
 
 function showStatus(text) {
   statusBox.textContent = text;
@@ -18,7 +18,7 @@ function getIdFromUrl() {
 }
 
 function renderStudent(student) {
-  var days = countDays(student.dateFrom, student.dateTo);
+  const days = countDays(student.dateFrom, student.dateTo);
 
   document.title = student.fullName + " досье студента";
   title.textContent = student.fullName;
@@ -44,8 +44,8 @@ function renderStudent(student) {
   card.hidden = false;
 }
 
-var requestedId = getIdFromUrl();
-var current = requestedId ? getStudent(requestedId) : null;
+const requestedId = getIdFromUrl();
+const current = requestedId ? getStudent(requestedId) : null;
 
 if (current) {
   renderStudent(current);
