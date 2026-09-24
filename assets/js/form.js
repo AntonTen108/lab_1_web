@@ -1,15 +1,14 @@
-var DRAFT_COOKIE = "draft_new_student";
-var DRAFT_DAYS = 30;
+const DRAFT_COOKIE = "draft_new_student";
+const DRAFT_DAYS = 30;
 
-var form = document.getElementById("application-form");
-var formTitle = document.getElementById("formTitle");
-var statusBox = document.getElementById("status");
-var savedNote = document.getElementById("savedNote");
-var notesCount = document.getElementById("notesCount");
-var clearBtn = document.getElementById("clearBtn");
-var submitBtn = document.getElementById("submitBtn");
+const form = document.getElementById("application-form");
+const formTitle = document.getElementById("formTitle");
+const statusBox = document.getElementById("status");
+const notesCount = document.getElementById("notesCount");
+const clearBtn = document.getElementById("clearBtn");
+const submitBtn = document.getElementById("submitBtn");
 
-var editing = null;
+let editing = null;
 
 function collectData() {
   return {
@@ -47,8 +46,8 @@ function showStatus(text) {
 }
 
 function setFieldError(name, message) {
-  var box = form.querySelector('[data-error-for="' + name + '"]');
-  var input = form.elements[name];
+  const box = form.querySelector('[data-error-for="' + name + '"]');
+  const input = form.elements[name];
 
   if (box) {
     box.textContent = message || "";
@@ -63,26 +62,26 @@ function setFieldError(name, message) {
 }
 
 function clearErrors() {
-  var boxes = form.querySelectorAll("[data-error-for]");
+  const boxes = form.querySelectorAll("[data-error-for]");
 
-  for (var i = 0; i < boxes.length; i++) {
+  for (let i = 0; i < boxes.length; i++) {
     setFieldError(boxes[i].getAttribute("data-error-for"), "");
   }
 }
 
-var NAME_RE = /^[А-Яа-яЁёA-Za-z]+(?:[- ][А-Яа-яЁёA-Za-z]+)+$/;
-var GROUP_RE = /^[А-ЯЁ][1-9]\d{3,4}$/;
-var ISU_RE = /^[1-9]\d{5}$/;
-var MIN_YEAR = 2000;
-var MAX_YEAR = 2099;
+const NAME_RE = /^[А-Яа-яЁёA-Za-z]+(?:[- ][А-Яа-яЁёA-Za-z]+)+$/;
+const GROUP_RE = /^[А-ЯЁ][1-9]\d{3,4}$/;
+const ISU_RE = /^[1-9]\d{5}$/;
+const MIN_YEAR = 2000;
+const MAX_YEAR = 2099;
 
 function isDateInRange(value) {
-  var year = Number(value.slice(0, 4));
+  const year = Number(value.slice(0, 4));
   return year >= MIN_YEAR && year <= MAX_YEAR;
 }
 
 function validate(data) { // TODO !!!!!!!!!!!!!
-  var errors = {};
+  const errors = {};
 
   if (data.fullName.length < 5) {
     errors.fullName = "Укажите фамилию, имя и отчество";
@@ -126,8 +125,7 @@ function saveDraft() {
   }
 
   setCookieJSON(DRAFT_COOKIE, collectData(), DRAFT_DAYS);
-  savedNote.textContent =
-    "Черновик сохранён в cookie: " + new Date().toLocaleTimeString("ru-RU");
+
 }
 
 function updateNotesCount() {
@@ -138,7 +136,7 @@ function getIdFromUrl() {
   return new URLSearchParams(window.location.search).get("id") || "";
 }
 
-var requestedId = getIdFromUrl();
+const requestedId = getIdFromUrl();
 
 if (requestedId) {
   editing = getStudent(requestedId);
@@ -151,12 +149,11 @@ if (requestedId) {
     showStatus("Запись не найдена " + "Заполните форму.");
   }
 } else {
-  var draft = getCookieJSON(DRAFT_COOKIE);
+  const draft = getCookieJSON(DRAFT_COOKIE);
 
   if (draft) {
     fillForm(draft);
-    savedNote.textContent = "Загружен cookie";
-  }
+    }
 }
 
 updateNotesCount();
@@ -182,12 +179,12 @@ form.addEventListener("submit", function (event) {
   event.preventDefault();
   clearErrors();
 
-  var data = collectData();
-  var errors = validate(data);
-  var names = Object.keys(errors);
+  const data = collectData();
+  const errors = validate(data);
+  const names = Object.keys(errors);
 
   if (names.length > 0) {
-    for (var i = 0; i < names.length; i++) {
+    for (let i = 0; i < names.length; i++) {
       setFieldError(names[i], errors[names[i]]);
     }
     showStatus("Проверьте заполнение полей: " + names.length + ".");
