@@ -114,7 +114,7 @@ function render() {
 }
 
 searchInput.addEventListener("input", render);
-tableBody.addEventListener("click", function (event) {
+tableBody.addEventListener("click", async function (event) {
   const id = event.target.getAttribute("data-remove-id");
 
   if (!id) {
@@ -124,7 +124,7 @@ tableBody.addEventListener("click", function (event) {
   const student = getStudent(id);
 
   if (student && confirm("Удалить запись: " + student.fullName + "?")) {
-    deleteStudent(id);
+    await deleteStudent(id);
     render();
     showStatus("Запись удалена: " + student.fullName + ".");
   }

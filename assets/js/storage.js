@@ -61,5 +61,5 @@ function saveStudent(data) {
 }
 
 function deleteStudent(id) {
-  deleteCookie(STUDENT_PREFIX + id);
+  return deleteCookie(STUDENT_PREFIX + id);
 }

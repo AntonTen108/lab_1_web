@@ -55,13 +55,13 @@ if (current) {
   showStatus("Не указан идентификатор студента");
 }
 
-deleteBtn.addEventListener("click", function () {
+deleteBtn.addEventListener("click", async function () {
   if (!current) {
     return;
   }
 
   if (confirm("Удалить запись: " + current.fullName + "?")) {
-    deleteStudent(current.id);
+    await deleteStudent(current.id);
     window.location.href = "../table/index.html";
   }
 });

@@ -42,7 +42,7 @@ function getCookieNames() {
 }
 
 function deleteCookie(name) {
-  setCookie(name, "", -1);
+  return cookieStore.delete({ name: encodeURIComponent(name), path: "/" });
 }
 
 function setCookieJSON(name, data, days) {

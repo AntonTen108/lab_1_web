@@ -175,7 +175,7 @@ form.addEventListener("input", function (event) {
 
 form.addEventListener("change", saveDraft);
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
   event.preventDefault();
   clearErrors();
 
@@ -197,18 +197,18 @@ form.addEventListener("submit", function (event) {
   }
 
   saveStudent(data);
-  deleteCookie(DRAFT_COOKIE);
+  await deleteCookie(DRAFT_COOKIE);
 
   window.location.href = "../table/index.html";
 });
 
-clearBtn.addEventListener("click", function () {
+clearBtn.addEventListener("click", async function () {
   if (editing) {
     fillForm(editing);
     showStatus("Значения восстановлены из сохранённой записи");
   } else {
     form.reset();
-    deleteCookie(DRAFT_COOKIE);
+    await deleteCookie(DRAFT_COOKIE);
     savedNote.textContent = "";
     showStatus("Форма очищена, черновик удалён");
   }
