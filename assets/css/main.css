@@ -203,7 +203,6 @@ button[data-remove-id] {
   display: none;
 }
 
-
 #counter,
 #empty {
   color: var(--muted);

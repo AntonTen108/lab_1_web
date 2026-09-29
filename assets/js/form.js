@@ -69,11 +69,11 @@ function clearErrors() {
   }
 }
 
-var NAME_RE = /^[А-Яа-яЁёA-Za-z]+(?:[- ][А-Яа-яЁёA-Za-z]+)+$/;
-var GROUP_RE = /^[A-Z][1-9]\d{3,4}$/;
-var ISU_RE = /^[1-9]\d{5}$/;
-var MIN_YEAR = 2000;
-var MAX_YEAR = 2099;
+const NAME_RE = /^[А-Яа-яЁёA-Za-z]+(?:[- ][А-Яа-яЁёA-Za-z]+)+$/;
+const GROUP_RE = /^[A-Z][1-9]\d{3,4}$/;
+const ISU_RE = /^[1-9]\d{5}$/;
+const MIN_YEAR = 2000;
+const MAX_YEAR = 2099;
 
 function isDateInRange(value) {
   const year = Number(value.slice(0, 4));
