@@ -71,7 +71,7 @@ function clearErrors() {
 }
 
 var NAME_RE = /^[А-Яа-яЁёA-Za-z]+(?:[- ][А-Яа-яЁёA-Za-z]+)+$/;
-var GROUP_RE = /^[А-ЯЁ][1-9]\d{3,4}$/;
+var GROUP_RE = /^[A-Z][1-9]\d{3,4}$/;
 var ISU_RE = /^[1-9]\d{5}$/;
 var MIN_YEAR = 2000;
 var MAX_YEAR = 2099;
@@ -92,7 +92,7 @@ function validate(data) { // TODO !!!!!!!!!!!!!
   if (!data.group) {
     errors.group = "Укажите группу";
   } else if (!GROUP_RE.test(data.group)) {
-    errors.group = "Русская буква и номер не с нуля, например Р3110";
+    errors.group = "Латинская буква, и номер например Р3110";
   }
   if (!ISU_RE.test(data.isuId)) {
     errors.isuId = "ID состоит из 6 цифр и не начинается с нуля";
