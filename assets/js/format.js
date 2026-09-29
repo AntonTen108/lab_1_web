@@ -3,7 +3,7 @@ function formatDate(value) {
     return "";
   }
 
-  var parts = value.split("-");
+  const parts = value.split("-");
 
   return parts.length === 3
     ? parts[2] + "." + parts[1] + "." + parts[0]
@@ -15,7 +15,7 @@ function formatDateTime(value) {
     return "";
   }
 
-  var date = new Date(value);
+  const date = new Date(value);
 
   return isNaN(date.getTime()) ? value : date.toLocaleString("ru-RU");
 }
@@ -33,8 +33,8 @@ function formatDormitory(value) {
 }
 
 function countDays(from, to) {
-  var start = new Date(from);
-  var end = new Date(to);
+  const start = new Date(from);
+  const end = new Date(to);
 
   if (isNaN(start.getTime()) || isNaN(end.getTime()) || end < start) {
     return 0;
@@ -44,8 +44,8 @@ function countDays(from, to) {
 }
 
 function describeTermState(from, to) {
-  var today = new Date();
-  var iso =
+  const today = new Date();
+  const iso =
     today.getFullYear() +
     "-" +
     String(today.getMonth() + 1).padStart(2, "0") +

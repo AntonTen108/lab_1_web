@@ -1,8 +1,8 @@
-var tableBody = document.getElementById("tableBody");
-var searchInput = document.getElementById("search");
-var counter = document.getElementById("counter");
-var emptyNote = document.getElementById("empty");
-var statusBox = document.getElementById("status");
+const tableBody = document.getElementById("tableBody");
+const searchInput = document.getElementById("search");
+const counter = document.getElementById("counter");
+const emptyNote = document.getElementById("empty");
+const statusBox = document.getElementById("status");
 
 function showStatus(text) {
   statusBox.textContent = text;
@@ -14,14 +14,14 @@ function studentUrl(student) {
 }
 
 function filterStudents(students, query) {
-  var text = query.trim().toLowerCase();
+  const text = query.trim().toLowerCase();
 
   if (!text) {
     return students;
   }
 
   return students.filter(function (student) {
-    var haystack = [
+    const haystack = [
       student.fullName,
       student.group,
       student.isuId,
@@ -35,7 +35,7 @@ function filterStudents(students, query) {
 }
 
 function createCell(text) {
-  var cell = document.createElement("td");
+  const cell = document.createElement("td");
 
   cell.textContent = text;
 
@@ -43,8 +43,8 @@ function createCell(text) {
 }
 
 function createNameCell(student) {
-  var cell = document.createElement("td");
-  var link = document.createElement("a");
+  const cell = document.createElement("td");
+  const link = document.createElement("a");
 
   link.href = studentUrl(student);
   link.textContent = student.fullName;
@@ -54,17 +54,17 @@ function createNameCell(student) {
 }
 
 function createActionsCell(student) {
-  var cell = document.createElement("td");
+  const cell = document.createElement("td");
 
-  var details = document.createElement("a");
+  const details = document.createElement("a");
   details.href = studentUrl(student);
   details.textContent = "Подробнее";
 
-  var edit = document.createElement("a");
+  const edit = document.createElement("a");
   edit.href = "../form/index.html?id=" + encodeURIComponent(student.id);
   edit.textContent = "Изменить";
 
-  var remove = document.createElement("button");
+  const remove = document.createElement("button");
   remove.type = "button";
   remove.textContent = "Удалить";
   remove.setAttribute("data-remove-id", student.id);
@@ -79,7 +79,7 @@ function createActionsCell(student) {
 }
 
 function createRow(student) {
-  var row = document.createElement("tr");
+  const row = document.createElement("tr");
 
   row.appendChild(createNameCell(student));
   row.appendChild(createCell(student.group));
@@ -94,12 +94,12 @@ function createRow(student) {
 }
 
 function render() {
-  var students = getStudents();
-  var visible = filterStudents(students, searchInput.value);
+  const students = getStudents();
+  const visible = filterStudents(students, searchInput.value);
 
   tableBody.textContent = "";
 
-  for (var i = 0; i < visible.length; i++) {
+  for (let i = 0; i < visible.length; i++) {
     tableBody.appendChild(createRow(visible[i]));
   }
 
@@ -114,17 +114,17 @@ function render() {
 }
 
 searchInput.addEventListener("input", render);
-tableBody.addEventListener("click", function (event) {
-  var id = event.target.getAttribute("data-remove-id");
+tableBody.addEventListener("click", async function (event) {
+  const id = event.target.getAttribute("data-remove-id");
 
   if (!id) {
     return;
   }
 
-  var student = getStudent(id);
+  const student = getStudent(id);
 
   if (student && confirm("Удалить запись: " + student.fullName + "?")) {
-    deleteStudent(id);
+    await deleteStudent(id);
     render();
     showStatus("Запись удалена: " + student.fullName + ".");
   }

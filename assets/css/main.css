@@ -203,7 +203,7 @@ button[data-remove-id] {
   display: none;
 }
 
-#savedNote,
+
 #counter,
 #empty {
   color: var(--muted);
@@ -348,9 +348,5 @@ td:last-child a {
 
   #application-form > p {
     margin: 0;
-  }
-
-  #savedNote {
-    margin-top: 6px;
   }
 }

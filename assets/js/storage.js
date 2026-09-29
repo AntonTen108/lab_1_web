@@ -1,20 +1,20 @@
-var STUDENT_PREFIX = "stud_";
-var STORAGE_DAYS = 300;
+const STUDENT_PREFIX = "stud_";
+const STORAGE_DAYS = 300;
 
 function makeId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 }
 
 function getStudents() {
-  var names = getCookieNames();
-  var students = [];
+  const names = getCookieNames();
+  const students = [];
 
-  for (var i = 0; i < names.length; i++) {
+  for (let i = 0; i < names.length; i++) {
     if (names[i].indexOf(STUDENT_PREFIX) !== 0) {
       continue;
     }
 
-    var student = getCookieJSON(names[i]);
+    const student = getCookieJSON(names[i]);
 
     if (student && student.id) {
       students.push(student);
@@ -37,10 +37,10 @@ function getStudent(id) {
 }
 
 function saveStudent(data) {
-  var now = new Date().toISOString();
-  var existing = data.id ? getStudent(data.id) : null;
+  const now = new Date().toISOString();
+  const existing = data.id ? getStudent(data.id) : null;
 
-  var student = {
+  const student = {
     id: data.id || makeId(),
     fullName: data.fullName,
     group: data.group,
@@ -61,5 +61,5 @@ function saveStudent(data) {
 }
 
 function deleteStudent(id) {
-  deleteCookie(STUDENT_PREFIX + id);
+  return deleteCookie(STUDENT_PREFIX + id);
 }
